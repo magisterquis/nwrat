@@ -66,7 +66,7 @@ opposed to the C2 server).
 
 C2 Server
 ---------
-When used with `-c2` the binary catches a callback.  A listen address and TLS
+When used with `-listen` the binary catches a callback.  A listen address and TLS
 certificate and key corresponding to the domain the implant expects need to be
 supplied via command-line options, similar to
 
