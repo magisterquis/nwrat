@@ -82,8 +82,3 @@ When one side or the other disconnects, a message similar to
 2020/07/22 00:28:25 Sent 206 bytes to implant
 ```
 will be logged.
-
-Windows
--------
-At the moment, the C2 side should work just fine, but the implant won't be able
-to start `/bin/sh`.  Feel free to submit a pull request.
